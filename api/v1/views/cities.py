@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Flask route that returns json status response
+cities module
 """
 from api.v1.views import app_views
 from flask import abort, jsonify, request
@@ -12,7 +12,7 @@ from flasgger.utils import swag_from
 @swag_from('swagger_yaml/cities_by_state.yml', methods=['GET', 'POST'])
 def cities_per_state(state_id=None):
     """
-        cities route to handle http method for requested cities by state
+    cities route to handle http methods for requested cities by state
     """
     state_obj = storage.get('State', state_id)
     if state_obj is None:
@@ -35,7 +35,6 @@ def cities_per_state(state_id=None):
         new_object = City(**req_json)
         new_object.save()
         return jsonify(new_object.to_json()), 201
-
 
 @app_views.route('/cities/<city_id>', methods=['GET', 'DELETE', 'PUT'])
 @swag_from('swagger_yaml/cities_id.yml', methods=['GET', 'DELETE', 'PUT'])

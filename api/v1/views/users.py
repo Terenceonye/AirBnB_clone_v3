@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    Flask route that returns json response
+    Flask route that handles users module
 """
 from api.v1.views import app_views
 from flask import abort, jsonify, request
@@ -32,7 +32,6 @@ def users_no_id(user_id=None):
         new_object = User(**req_json)
         new_object.save()
         return jsonify(new_object.to_json()), 201
-
 
 @app_views.route('/users/<user_id>', methods=['GET', 'DELETE', 'PUT'])
 @swag_from('swagger_yaml/users_id.yml', methods=['GET', 'DELETE', 'PUT'])
